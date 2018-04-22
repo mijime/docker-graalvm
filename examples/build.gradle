@@ -1,0 +1,32 @@
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "com.netflix.nebula:nebula-clojure-plugin:5.0.6"
+  }
+}
+
+plugins {
+  id "nebula.clojure" version "5.0.6"
+}
+
+apply plugin: "nebula.clojure"
+apply plugin: "application"
+
+mainClassName = "org.example.core"
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile "org.clojure:clojure:1.9.0"
+  compile 'spootnik:net:0.3.3-beta37'
+}
+
+compileClojure {
+  aotCompile = true
+}
