@@ -2,7 +2,7 @@
 version: '3'
 services:
   graal:
-    build: ..
+    build: ../debian
     command: ./gradlew run
     working_dir: /var/app
     ports:
@@ -10,4 +10,10 @@ services:
     volumes:
       - .:/var/app
       - /tmp/gradle:/root/.gradle
+      - /tmp/build1:/var/app/build
+  bench_graal:
+    image: httpd
+    command: ab -n 1000 -c 500 http://examples_graal_1:8080/
+    depends_on:
+      - graal
 ...
